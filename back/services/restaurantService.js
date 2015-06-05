@@ -32,7 +32,7 @@ class RestaurantService{
 				restaurants.forEach(function(restaurant) {
 
 					restaurantPromisses.push(new Promise(function(resolve2, reject2) {
-						var loadMenuPromise = self.loadMenu(restaurant.url);
+						var loadMenuPromise = self.loadMenu(restaurant.url, self);
 
 						loadMenuPromise.then(function(dailyMenu) {
 							restaurant.menu = dailyMenu;
@@ -57,84 +57,87 @@ class RestaurantService{
 
     }
 
-	loadMenu(menuUrl) {
+    parserMenickaCZ(resolve, reject, err, resp, body_1250){
+        var menu = [];
+        //[{"title":"bucek", "description":"nejlepsi chuti", "price":"120Kc", "type": "soup"},{}]
+        var body_utf8 = iconv.decode(body_1250, 'win1250');
+        var page = cheerio.load(body_utf8);
+        var menicka = page('.menicka'); //use your CSS selector here
 
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1; //January is 0!
+        var yyyy = today.getFullYear();
+        var date = dd+'.'+mm+'.'+yyyy;
+        //console.log('date: ' + date);
+
+        page(menicka).find('div .datum').each(function (i, elem) {
+            if(page(this).text().includes(date)){
+                console.log('menu for date ' + date);
+
+                var dnesni_menu = page(this).parent()
+                dnesni_menu.find('div').each(function (i, elem) {
+
+                    //if(!page(this).attr('class').includes("newrows")) {
+                    //    console.log('    i: ' + i + ' text:' + page(this).text() + ' class:' + page(this).attr('class'));
+                    //}
+
+                    if (page(this).attr('class').includes("nabidka_")) {
+                        var price = '';
+                        if (page(this).next().hasClass('cena')) {
+                            price = page(this).next().text()
+                        }
+                        var title = String(page(this).text()).replace('\t','');
+                        var description = '';
+                        if(title.includes("-") || title.includes("–") || title.includes("/")){
+                            var parts = title.split(/[-–/]+/)
+                            //console.log('0:' + parts[0] + '  1:' + parts[1]);
+                            if(parts.length == 2){
+                                title = parts[0];
+                                description = parts[1];
+                            }
+                            if(parts.length == 3){
+                                title = parts[0]+'-'+parts[1]; //Kuře bang-bang
+                                description = parts[2];
+                            }
+                            //console.log('    i: ' + i + ' text:' + page(this).text() + ' class:' + page(this).attr('class'));
+                        }
+                        var type = '';
+                        if(page(this).attr('class').includes("capitalize")) {
+                            type = 'soup';
+                        }
+                        console.log('title: ' + title + '  description: ' + description +'  price: ' + price + '  type: ' + type);
+
+                        menu.push({
+                            title: title,
+                            description: description,
+                            price: price,
+                            type: type
+                        });
+                    }
+                });
+
+            }
+        });
+
+        //console.log('json:');
+        //console.log(menu);
+        console.log("===============");
+        resolve(menu);
+    }
+
+	loadMenu(menuUrl, self) {
 		return new Promise(function(resolve, reject) {
-
-			var menu = [];
-
-            //[{"title":"bucek", "description":"nejlepsi chuti", "price":"120Kc", "type": "soup"},{}]
-
 			request.get({
 					uri: menuUrl,
 					encoding: null
 				},
-				function (err, resp, body_1250) {
+				function (err, resp, body) {
                     console.log("menuUrl: " + menuUrl);
-					var body_utf8 = iconv.decode(body_1250, 'win1250');
-					var page = cheerio.load(body_utf8);
-					var menicka = page('.menicka'); //use your CSS selector here
+                    if(menuUrl.includes("menicka.cz")){
+                        self.parserMenickaCZ(resolve, reject, err, resp, body);
+                    }
 
-                    var today = new Date();
-                    var dd = today.getDate();
-                    var mm = today.getMonth()+1; //January is 0!
-                    var yyyy = today.getFullYear();
-                    var date = dd+'.'+mm+'.'+yyyy;
-                    //console.log('date: ' + date);
-
-                    page(menicka).find('div .datum').each(function (i, elem) {
-                        if(page(this).text().includes(date)){
-                            console.log('menu for date ' + date);
-
-                            var dnesni_menu = page(this).parent()
-                            dnesni_menu.find('div').each(function (i, elem) {
-
-                                //if(!page(this).attr('class').includes("newrows")) {
-                                //    console.log('    i: ' + i + ' text:' + page(this).text() + ' class:' + page(this).attr('class'));
-                                //}
-
-                                if (page(this).attr('class').includes("nabidka_")) {
-                                    var price = '';
-                                    if (page(this).next().hasClass('cena')) {
-                                        price = page(this).next().text()
-                                    }
-                                    var title = String(page(this).text()).replace('\t','');
-                                    var description = '';
-                                    if(title.includes("-") || title.includes("–") || title.includes("/")){
-                                        var parts = title.split(/[-–/]+/)
-                                        //console.log('0:' + parts[0] + '  1:' + parts[1]);
-                                        if(parts.length == 2){
-                                            title = parts[0];
-                                            description = parts[1];
-                                        }
-                                        if(parts.length == 3){
-                                            title = parts[0]+'-'+parts[1]; //Kuře bang-bang
-                                            description = parts[2];
-                                        }
-                                        //console.log('    i: ' + i + ' text:' + page(this).text() + ' class:' + page(this).attr('class'));
-                                    }
-                                    var type = '';
-                                    if(page(this).attr('class').includes("capitalize")) {
-                                        type = 'soup';
-                                    }
-                                    console.log('title: ' + title + '  description: ' + description +'  price: ' + price + '  type: ' + type);
-
-                                    menu.push({
-                                        title: title,
-                                        description: description,
-                                        price: price,
-                                        type: type
-                                    });
-                                }
-                            });
-
-                        }
-                    });
-
-                    //console.log('json:');
-                    //console.log(menu);
-                    console.log("===============");
-					resolve(menu);
 				}
 			);
 
@@ -143,23 +146,14 @@ class RestaurantService{
 
     sendMenu(channel) {
 
-    	var self = this;
+    	var self = this
 
-		var menuPromises = [];
+    	this.getAll().then(function (restaurants) {
 
-		return new Promise(function(resolve, reject) {
-
-			self.getAll().then(function (restaurants) {
-
-				restaurants.forEach(function (m) {
-					menuPromises.push(self._slackMessageService.sendMenu(m, channel))
-				});
-
-				Promise.all(menuPromises).then(function() {
-					resolve();
-				})
-			});
-		});
+    		restaurants.forEach(function(m) {
+    			self._slackMessageService.sendMenu(m, channel, function(){})
+    		})
+    	})		
     }
 }
 
