@@ -3,7 +3,7 @@
 module demoApp {
     'use strict';
 
-    export class DemoController {
+    export class RestaurantsController {
 
         // $inject annotation.
         // It provides $injector with information about dependencies to be injected into constructor
@@ -19,13 +19,10 @@ module demoApp {
         // controller's name is registered in Application.ts and specified from ng-controller attribute in index.html
         constructor(private $scope:IDemoScope,
                     private $location:ng.ILocationService,
-                    private Restaurants: any) {
-            this.Restaurants.query();
-        }
-
-
-        setName(name: string) {
-            this.$scope.name = name;
+                    private Restaurants: restangular.IService) {
+            this.Restaurants.query().then((result) => {
+                $scope.restaurants = result;
+            });
         }
 
     }

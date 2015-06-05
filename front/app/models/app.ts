@@ -12,6 +12,6 @@ module demoApp {
             restangularProvider.setDefaultHeaders({ 'Content-Type': 'application/json' });
             restangularProvider.setBaseUrl('http://private-0c8c5-indiehackapi.apiary-mock.com/api/');
         }])
-        .controller('DemoController', DemoController)
-        .service('Restaurants', Restaurants);
+        .service('Restaurants', Restaurants)
+        .controller('RestaurantsController', RestaurantsController);
 }
