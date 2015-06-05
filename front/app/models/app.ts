@@ -14,7 +14,7 @@ module demoApp {
             $urlRouterProvider.otherwise('/list');
 
             $stateProvider.state('list', {
-                 url: '/list',
+                url: '/list',
                 templateUrl: 'templates/listofall.html',
                 controller: 'RestaurantsController'
             }).state('login', {
