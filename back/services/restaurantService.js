@@ -61,38 +61,62 @@ class RestaurantService{
 
 			var menu = [];
 
-			//[{"description":"bucek", "price":"120Kc"},{}]
+            //[{"title":"bucek", "price":"120Kc", "type": "soup"},{}]
 
 			request.get({
 					uri: menuUrl,
 					encoding: null
 				},
 				function (err, resp, body_1250) {
+                    console.log("menuUrl: " + menuUrl);
 					var body_utf8 = iconv.decode(body_1250, 'win1250');
 					var page = cheerio.load(body_utf8);
 					var menicka = page('.menicka'); //use your CSS selector here
-					page(menicka).find('div').each(function (i, elem) {
-						//console.log(page(menicka).text() + ':\n  ' + page(menicka).attr('href'));
 
-						//if(!page(this).attr('class').includes("newrows")) {
-						//	console.log('    i: ' + i + ' text:' + page(this).text() + ' class:' + page(this).attr('class'));
-						//}
+                    var today = new Date();
+                    var dd = today.getDate();
+                    var mm = today.getMonth()+1; //January is 0!
+                    var yyyy = today.getFullYear();
+                    var date = dd+'.'+mm+'.'+yyyy;
+                    //console.log('date: ' + date);
 
-						if (page(this).attr('class').includes("nabidka_")) {
-							var price = '';
-							if (page(this).next().hasClass('cena')) {
-								price = page(this).next().text()
-							}
-							var description = page(this).text();
-							console.log('description: ' + description + '  price: ' + price);
+                    page(menicka).find('div .datum').each(function (i, elem) {
+                        if(page(this).text().includes(date)){
+                            console.log('menu for date ' + date);
 
-							menu.push({
-								description: description,
-								price: price
-							});
-						}
-					});
+                            var dnesni_menu = page(this).parent()
+                            dnesni_menu.find('div').each(function (i, elem) {
 
+                                //if(!page(this).attr('class').includes("newrows")) {
+                                //    console.log('    i: ' + i + ' text:' + page(this).text() + ' class:' + page(this).attr('class'));
+                                //}
+
+                                if (page(this).attr('class').includes("nabidka_")) {
+                                    var price = '';
+                                    if (page(this).next().hasClass('cena')) {
+                                        price = page(this).next().text()
+                                    }
+                                    var title = String(page(this).text()).replace('\t','');
+                                    var type = '';
+                                    if(page(this).attr('class').includes("capitalize")) {
+                                        type = 'soup';
+                                    }
+                                    console.log('title: ' + title + '  price: ' + price + '  type: ' + type);
+
+                                    menu.push({
+                                        title: title,
+                                        price: price,
+                                        type: type
+                                    });
+                                }
+                            });
+
+                        }
+                    });
+
+                    //console.log('json:');
+                    //console.log(menu);
+                    console.log("===============");
 					resolve(menu);
 				}
 			);
