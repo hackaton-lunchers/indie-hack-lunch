@@ -33,10 +33,10 @@ class RestaurantService{
 						var loadMenuPromise = self.loadMenu(restaurant.url);
 
 						loadMenuPromise.then(function(dailyMenu) {
-							restaurant.dailyMenu = dailyMenu;
+							restaurant.menu = dailyMenu;
 
 							dailyMenus.push(restaurant);
-							var updatePromise = self._restaurantRepository.updateRestaurant({title: restaurant.title, dailyMenu: dailyMenu});
+							var updatePromise = self._restaurantRepository.updateRestaurant({title: restaurant.title, menu: dailyMenu});
 
 							updatePromise.then(function () {
 								resolve();

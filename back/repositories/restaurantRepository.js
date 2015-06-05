@@ -8,7 +8,7 @@ class RestaurantRepository extends BaseRepository{
 	constructor() {
 
 		super();
-		this._Restaurant = this._db.model('Restaurant', { title: String, url: String, dailyMenu: [this._db.Schema.Types.Mixed] });
+		this._Restaurant = this._db.model('Restaurant', { title: String, url: String, menu: [this._db.Schema.Types.Mixed] });
 	}
 
 	getRestaurants() {
