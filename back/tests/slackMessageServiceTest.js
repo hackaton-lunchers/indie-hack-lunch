@@ -15,7 +15,7 @@ describe('SlackService', function(){
 	});
 
 
-	it('sends message to slack', function() {
-		slackService.sendMenu(null, null)
+	it('sends message to slack', function(done) {
+		slackService.sendMenu(null, null, done);
 	});
 });
