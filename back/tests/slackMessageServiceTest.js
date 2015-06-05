@@ -106,4 +106,8 @@ describe('SlackService', function(){
 		});
 
 	});
+
+	it('sends message to slack ', function(done) {
+		slackService.sendUserIsGoingTo("tomas_milata", "El Pueblo", "#lunch-slackbot-test", done)
+	});
 });

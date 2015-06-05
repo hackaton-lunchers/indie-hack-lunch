@@ -1,4 +1,5 @@
 /// <reference path='../services/authenticationAPI.ts' />
+/// <reference path='demoscope.ts' />
 
 module demoApp {
     'use strict';
@@ -10,21 +11,25 @@ module demoApp {
             // it is better to have it close to the constructor, because the parameters must match in count and type.
             // See http://docs.angularjs.org/guide/di
             public static $inject = [
-                'Auth'
+                'Auth',
+                '$scope'
             ];
 
             // dependencies are injected via AngularJS $injector
             // controller's name is registered in Application.ts and specified from ng-controller attribute in index.html
-            constructor(private Auth:any) {
-
+            constructor(private Auth: any, private $scope: IDemoScope) {
+                this.$scope.user = {};
+                console.log('Init');
             }
 
             login(username: string) {
-                console.log(username);
+                if(username) {
+                    this.Auth.login(username);
+                }
             }
 
             logout() {
-                this.Auth.logout();
+                console.log('Test');
             }
         }
 

@@ -2,7 +2,7 @@
 
 var request = require('request');
 
-
+var URL = 'https://hooks.slack.com/services/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'
 
 
 class SlackMessageService {
@@ -55,6 +55,23 @@ class SlackMessageService {
 			});
 		});
 	}    
+
+	sendUserIsGoingTo(username, restaurant, channel, done) {
+		var payload = {
+			"channel": channel, 
+			"username": "Lunch",
+			"text": "@" + username + " is going to " + restaurant + ".", 
+			"icon_emoji": ":spaghetti:"
+		}
+
+		request.post({
+			url:     URL,
+			json:    payload
+		}, function(error, response, body){
+			console.log(error);
+			done();
+		})
+	}  
 } 
 
 module.exports = SlackMessageService;

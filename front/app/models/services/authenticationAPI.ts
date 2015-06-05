@@ -10,8 +10,8 @@ module demoApp {
         ) {
         }
 
-        login() {
-            console.log('Login');
+        login(username: string) {
+            this.Restangular.all('login').customPOST(username);
         }
 
         register() {
@@ -21,7 +21,5 @@ module demoApp {
         logout() {
             console.log('Logout');
         }
-
     }
-
 }

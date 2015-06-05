@@ -32,12 +32,6 @@
     "quotemark": [true, "single"],
     "radix": true,
     "triple-equals": [true, "allow-null-check"],
-    "variable-name": false,
-    "whitespace": [true,
-      "check-branch",
-      "check-decl",
-      "check-operator",
-      "check-separator"
-    ]
+    "variable-name": false
   }
 }

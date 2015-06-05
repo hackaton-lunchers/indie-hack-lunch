@@ -21,7 +21,7 @@ module demoApp {
             }).state('login', {
                 url: '/login',
                 templateUrl: 'templates/login.html',
-                controller: 'AuthController'
+                controller: 'AuthController as auth'
             })
         })
         .config(['RestangularProvider', (restangularProvider: restangular.IProvider) => {
