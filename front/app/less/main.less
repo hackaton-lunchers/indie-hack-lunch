@@ -3,6 +3,7 @@ body {
   color: rgb(85, 84, 89);
   font-size: 15px;
   font-family: 'Montserrat', sans-serif;
+  margin-bottom: 30px;
 }
 a {
   color: rgb(85, 84, 89);
@@ -45,7 +46,8 @@ a:hover {
 .restaurant h3 {
   margin: 0;
   display: inline-block;
-  font-size: 15px;
+  font-size: 16px;
+  color: #000000;
 }
 
 .price {
@@ -64,15 +66,25 @@ h2 {
   font-size: 28px;
 }
 
+.restaurant {
+  margin-top: 30px;
+}
+.restaurant:first-child {
+  margin-top: 0;
+}
+
 .restaurant ul {
-  margin-left: -30px;
+  margin-left: 0;
+  padding-left: 0;
 }
 
 .restaurant ul li {
-  margin-left: 5px;
+  margin-left: 0;
+  padding-left: 0;
   border-bottom: 1px dashed #303030;
   line-height: 30px;
   padding: 0;
+  list-style: none;
 }
 
 .restaurant ul li:last-child {
@@ -115,6 +127,7 @@ h2 {
   line-height: 15px;
   margin-bottom: 7px;
   color: #303030;
+  margin-left: 15px;
 }
 
 .card-container.card {
