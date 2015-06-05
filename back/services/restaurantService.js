@@ -146,14 +146,23 @@ class RestaurantService{
 
     sendMenu(channel) {
 
-    	var self = this
+        var self = this;
 
-    	this.getAll().then(function (restaurants) {
+        var menuPromises = [];
 
-    		restaurants.forEach(function(m) {
-    			self._slackMessageService.sendMenu(m, channel, function(){})
-    		})
-    	})		
+        return new Promise(function(resolve, reject) {
+
+            self.getAll().then(function (restaurants) {
+
+                restaurants.forEach(function (m) {
+                    menuPromises.push(self._slackMessageService.sendMenu(m, channel))
+                });
+
+                Promise.all(menuPromises).then(function() {
+                    resolve();
+                })
+            });
+        });
     }
 }
 
