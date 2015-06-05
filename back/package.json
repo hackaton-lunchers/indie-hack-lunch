@@ -1,0 +1,41 @@
+{
+  "name": "ecma6-eshop",
+  "version": "0.0.1",
+  "author": "David Bohunek <david@bohunek.net>",
+  "scripts": {
+    "test": "mocha --harmony_classes ./tests/**/*.js",
+    "start": "iojs --harmony_classes server.js",
+    "debug": "node-debug server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/davidbohunek/ecma6-eshop"
+  },
+  "bugs": {
+    "url": "https://github.com/davidbohunek/ecma6-eshop/issues"
+  },
+  "keywords": [
+    "ecmascript 6",
+    "ecma6",
+    "io.js",
+    "node.js",
+    "iojs",
+    "nodejs",
+    "sample"
+  ],
+  "dependencies": {
+    "bcryptjs": "*",
+    "hapi": "*",
+    "hapi-auth-basic": "*",
+    "lout": "*",
+    "mongodb": "^2.0.33",
+    "mongoose": "^4.0.4"
+  },
+  "devDependencies": {
+    "chai": "*",
+    "chai-spies": "*",
+    "gulp": "*",
+    "mocha": "*"
+  },
+  "license": "MIT"
+}
