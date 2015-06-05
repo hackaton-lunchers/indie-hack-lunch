@@ -7,6 +7,8 @@ var request = require('request');
 
 class SlackMessageService {
 
+	//@username
+	//+channel
 	sendMenu(menu, channel, done) {
 
 		var payload = {
@@ -24,28 +26,34 @@ class SlackMessageService {
 			]
 		};
 
-		menu.menu.forEach(function(m) {			
-			var type = ""
-			if (m.type) {
-				type = "[" + m.type + "] "
-			}
-			payload.attachments[0].fields.push(
-			{
-				"title": type + m.title,
-				"value": m.price  + " <https://url.com/|Like> <https://url.com/|Dislike>"
-			}
-			)
+		return new Promise(function(resolve, reject) {
+
+			menu.menu.forEach(function (m) {
+				var type = "";
+				if (m.type) {
+					type = "[" + m.type + "] "
+				}
+				payload.attachments[0].fields.push(
+					{
+						"title": type + m.title,
+						"value": m.price + " <https://url.com/|Like> <https://url.com/|Dislike>"
+					}
+				)
+			});
+
+
+			request.post({
+				url: 'https://hooks.slack.com/services/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',
+				json: payload
+			}, function (error, response, body) {
+
+				if (error) {
+					reject();
+				} else {
+					resolve();
+				}
+			});
 		});
-
-		
-
-		request.post({
-			url:     'https://hooks.slack.com/services/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',
-			json:    payload
-		}, function(error, response, body){
-			console.log(error);
-			done();
-		})
 	}    
 } 
 

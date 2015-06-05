@@ -17,6 +17,12 @@ class RestaurantController{
             reply(dailyMenus);
         });
     }
+
+    sendDailyMenus(request, reply) {
+        services.restaurants.sendMenu("@janbarta").then(function(){
+            reply({status: "send"});
+        });
+    }
 }
 
 module.exports = RestaurantController;

@@ -6,6 +6,7 @@ var lout = require('lout');
 var Routes = require('./routes');
 var services = require('./services');
 var repeat = require('repeat');
+var mongoose = require('mongoose');
 
 var server = new Hapi.Server();
 var routes = new Routes(server);
@@ -36,6 +37,8 @@ server.register(Basic, function (err) {
         console.log('Server running at:', server.info.uri);
     });
 });
+
+mongoose.connect('mongodb://admin:lunchers123@ds043262.mongolab.com:43262/lunchers');
 
 repeat(function() {
     services.restaurants.loadDailyMenus().then(services.restaurants.sendMenu('#lunch-slackbot-test'));

@@ -1,4 +1,6 @@
-"use strict"
+"use strict";
+
+var UserRepository = require('../repositories/userRepository');
 
 class UserService{
     constructor() {
@@ -10,6 +12,8 @@ class UserService{
                 id: 1
             }
         ];
+
+		this._userRepository = new UserRepository();
     }
 
     getUser(username) {
@@ -24,6 +28,15 @@ class UserService{
             reject('Unknown user');
         });
     }
+
+    updateUserPreferences() {
+		return this._userRepository.updateRestaurantPreference();
+    }
+
+    getUsers() {
+
+    }
+
 }
 
 module.exports = UserService;

@@ -39,6 +39,15 @@ class Routes{
 
         this.server.route({
             method: 'GET',
+            path: '/restaurants/send-daily-menus',
+            handler: controllers.restaurants.sendDailyMenus,
+            config: {
+                auth: 'simple'
+            }
+        });
+
+        this.server.route({
+            method: 'GET',
             path: '/auth',
             handler: controllers.auth.auth_with_slack
         });
