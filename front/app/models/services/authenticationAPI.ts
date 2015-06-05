@@ -14,6 +14,10 @@ module demoApp {
             console.log('Login');
         }
 
+        register() {
+            console.log('Registration');
+        }
+
         logout() {
             console.log('Logout');
         }
