@@ -21,8 +21,10 @@
 <div class="container">
     <div class="col-sm-12 restaurant" ng-repeat="restaurant in restaurants">
         <h2>{{restaurant.title}}</h2>
-        <ul ng-repeat="menu in restaurant.menu">
-            <li><h3>{{menu.title}}</h3> <span class="price">{{menu.price}}</span></li>
+        <ul>
+            <li ng-repeat="menu in restaurant.menu">
+                <h3>{{menu.title}}</h3> <span class="price">{{menu.price}}</span>
+            </li>
         </ul>
     </div>
 </div>
