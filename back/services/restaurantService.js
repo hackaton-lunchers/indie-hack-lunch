@@ -73,6 +73,7 @@ class RestaurantService{
 					}
 				});
 
+				console.log('json:');
 				console.log(menu);
 
 				console.log("\n\n===============");
@@ -80,7 +81,7 @@ class RestaurantService{
 		);
 
 
-		return menuUrl;
+		return menu;
     }
 }
 
