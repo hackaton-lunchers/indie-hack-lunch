@@ -1,0 +1,18 @@
+<div class="main container">
+    <div class="col-sm-12 restaurant" ng-repeat="restaurant in restaurants">
+        <div class="tools">
+            <a href="" title="Save to favourites">
+                <button type="button" class="btn btn-default" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                    Add to favourites
+                </button>
+            </a>
+        </div>
+        <h2>{{restaurant.title}}</h2>
+        <ul class="">
+            <li ng-repeat="menu in restaurant.menu">
+                <h3>{{menu.title}}</h3> <span class="price">{{menu.price}}</span>
+            </li>
+        </ul>
+    </div>
+</div>

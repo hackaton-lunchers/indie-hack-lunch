@@ -11,15 +11,15 @@ module demoApp {
     angular
         .module('demo-app', ['restangular', 'ui.router'])
         .config(($stateProvider:ng.ui.IStateProvider, $urlRouterProvider:ng.ui.IUrlRouterProvider) => {
-            $urlRouterProvider.otherwise('/home');
+            $urlRouterProvider.otherwise('/list');
 
-            $stateProvider.state('home', {
-                url: '/home',
-                template: '<b>Home</b>'
-            }).state('test', {
-                url: '/test',
-                templateUrl: 'template/demo.html',
-                controller: 'TechnologyController'
+            $stateProvider.state('list', {
+                 url: '/list',
+                templateUrl: 'templates/listofall.html',
+                controller: 'RestaurantsController'
+            }).state('login', {
+                url: '/login',
+                controller: 'AuthController'
             })
         })
         .config(['RestangularProvider', (restangularProvider: restangular.IProvider) => {
