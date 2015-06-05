@@ -1,4 +1,4 @@
-/// <reference path='services/restaurantAPI.ts' />
+/// <reference path='../services/restaurantAPI.ts' />
 
 module demoApp {
     'use strict';
