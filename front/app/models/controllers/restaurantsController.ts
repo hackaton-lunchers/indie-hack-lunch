@@ -1,9 +1,9 @@
-/// <reference path='services/restaurantAPI.ts' />
+/// <reference path='../services/restaurantAPI.ts' />
 
 module demoApp {
     'use strict';
 
-    export class DemoController {
+    export class RestaurantsController {
 
         // $inject annotation.
         // It provides $injector with information about dependencies to be injected into constructor
@@ -20,12 +20,9 @@ module demoApp {
         constructor(private $scope:IDemoScope,
                     private $location:ng.ILocationService,
                     private Restaurants: any) {
-            this.Restaurants.query();
-        }
-
-
-        setName(name: string) {
-            this.$scope.name = name;
+            this.Restaurants.query().then((result) => {
+                $scope.restaurants = result;
+            });
         }
 
     }
