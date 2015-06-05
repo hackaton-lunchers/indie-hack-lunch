@@ -19,8 +19,8 @@ module demoApp {
 
             }
 
-            login(credentials: any) {
-                this.Auth.login(credentials);
+            login(username: string) {
+                console.log(username);
             }
 
             logout() {

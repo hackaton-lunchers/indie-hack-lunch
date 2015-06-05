@@ -2,6 +2,7 @@
 /// <reference path='../typings/angular-ui-router/angular-ui-router.d.ts' />
 /// <reference path='../typings/restangular/restangular.d.ts' />
 /// <reference path='./controllers/restaurantsController.ts' />
+/// <reference path='./controllers/authController.ts' />
 /// <reference path='./services/restaurantAPI.ts' />
 /// <reference path='./services/authenticationAPI.ts' />
 
@@ -19,6 +20,7 @@ module demoApp {
                 controller: 'RestaurantsController'
             }).state('login', {
                 url: '/login',
+                templateUrl: 'templates/login.html',
                 controller: 'AuthController'
             })
         })
@@ -28,5 +30,6 @@ module demoApp {
         }])
         .service('Restaurants', Restaurants)
         .service('Auth', Auth)
-        .controller('RestaurantsController', RestaurantsController);
+        .controller('RestaurantsController', RestaurantsController)
+        .controller('AuthController', AuthController);
 }
