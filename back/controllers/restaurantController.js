@@ -19,7 +19,7 @@ class RestaurantController{
     }
 
     sendDailyMenus(request, reply) {
-        services.restaurants.sendMenu("@janbarta").then(function(){
+        services.restaurants.sendMenu("#lunch").then(function(){
             reply({status: "send"});
         });
     }
