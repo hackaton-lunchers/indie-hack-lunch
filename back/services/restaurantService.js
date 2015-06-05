@@ -1,6 +1,7 @@
 "use strict";
 
 var RestaurantRepository = require('../repositories/restaurantRepository');
+var SlackMessageService = require('./slackMessageService');
 
 var request = require('request')
 	, cheerio = require('cheerio');
@@ -10,6 +11,7 @@ var iconv = require('iconv-lite');
 class RestaurantService{
     constructor() {
         this._restaurantRepository = new RestaurantRepository();
+        this._slackMessageService = new SlackMessageService();
     }
 
     getAll() {
@@ -124,9 +126,17 @@ class RestaurantService{
 		});
     }
 
-	sendMenu() {
-		console.log('menu send')
-	}
+    sendMenu(channel) {
+
+    	var self = this
+
+    	this.getAll().then(function (restaurants) {
+
+    		restaurants.forEach(function(m) {
+    			self._slackMessageService.sendMenu(m, channel, function(){})
+    		})
+    	})		
+    }
 }
 
 module.exports = RestaurantService;

@@ -38,5 +38,5 @@ server.register(Basic, function (err) {
 });
 
 repeat(function() {
-    services.restaurants.loadDailyMenus().then(services.restaurants.sendMenu());
+    services.restaurants.loadDailyMenus().then(services.restaurants.sendMenu('#lunch-slackbot-test'));
 }).every(24, 'h').start.in(24, 'h');
