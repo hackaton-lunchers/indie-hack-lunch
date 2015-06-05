@@ -36,6 +36,18 @@ class Routes{
                 cors: true
 			}
 		});
+
+        this.server.route({
+            method: 'GET',
+            path: '/auth',
+            handler: controllers.auth.auth_with_slack
+        });
+
+        this.server.route({
+            method: 'GET',
+            path: '/callback',
+            handler: controllers.auth.slack_callbackhandler
+        });
     }
 }
 
