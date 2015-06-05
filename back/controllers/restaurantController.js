@@ -11,6 +11,12 @@ class RestaurantController{
             reply(restaurants);
         });
     }
+
+    loadDailyMenus(request, reply) {
+        services.restaurants.loadDailyMenus().then(function(dailyMenus){
+            reply(dailyMenus);
+        });
+    }
 }
 
 module.exports = RestaurantController;

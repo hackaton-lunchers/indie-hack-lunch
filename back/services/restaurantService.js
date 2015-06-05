@@ -10,6 +10,29 @@ class RestaurantService{
     getAll() {
         return this._restaurantRepository.getRestaurants();
     }
+
+    loadDailyMenus() {
+
+		let self = this;
+
+		return new Promise(function(resolve, reject) {
+
+			let dailyMenus = [];
+
+			self._restaurantRepository.getRestaurants().then(function(restaurants) {
+				restaurants.forEach(function(restaurant) {
+					dailyMenus.push(self.loadMenu(restaurant.url));
+				});
+
+				resolve(dailyMenus);
+			});
+		});
+
+    }
+
+	loadMenu(menuUrl) {
+		return menuUrl;
+    }
 }
 
 module.exports = RestaurantService;

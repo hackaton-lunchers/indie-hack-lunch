@@ -25,6 +25,15 @@ class Routes{
                 auth: 'simple'
             }
         });
+
+		this.server.route({
+			method: 'GET',
+			path: '/restaurants/load-daily-menus',
+			handler: controllers.restaurants.loadDailyMenus,
+			config: {
+				auth: 'simple'
+			}
+		});
     }
 }
 
