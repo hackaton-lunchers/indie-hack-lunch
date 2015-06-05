@@ -12,7 +12,7 @@ module demoApp {
 
        query() {
            return this.Restangular
-               .all('menu')
+               .all('restaurants/all')
                .getList();
        }
 

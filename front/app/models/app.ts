@@ -24,7 +24,7 @@ module demoApp {
         })
         .config(['RestangularProvider', (restangularProvider: restangular.IProvider) => {
             restangularProvider.setDefaultHeaders({ 'Content-Type': 'application/json' });
-            restangularProvider.setBaseUrl('http://private-0c8c5-indiehackapi.apiary-mock.com/api/');
+            restangularProvider.setBaseUrl('http://localhost:8084/');
         }])
         .service('Restaurants', Restaurants)
         .service('Auth', Auth)

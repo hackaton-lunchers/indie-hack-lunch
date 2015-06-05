@@ -22,7 +22,8 @@ class Routes{
             path: '/restaurants/all',
             handler: controllers.restaurants.getAll,
             config: {
-                auth: 'simple'
+            //    auth: 'simple'
+                cors: true
             }
         });
 
@@ -31,7 +32,8 @@ class Routes{
 			path: '/restaurants/load-daily-menus',
 			handler: controllers.restaurants.loadDailyMenus,
 			config: {
-				auth: 'simple'
+			//	auth: 'simple'
+                cors: true
 			}
 		});
     }
