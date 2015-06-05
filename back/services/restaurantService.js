@@ -38,7 +38,7 @@ class RestaurantService{
 							restaurant.menu = dailyMenu;
 
 							dailyMenus.push(restaurant);
-							var updatePromise = self._restaurantRepository.updateRestaurant({title: restaurant.title, menu: dailyMenu});
+							var updatePromise = self._restaurantRepository.updateRestaurant({description: restaurant.description, menu: dailyMenu});
 
 							updatePromise.then(function () {
 								resolve();
@@ -63,7 +63,7 @@ class RestaurantService{
 
 			var menu = [];
 
-            //[{"title":"bucek", "price":"120Kc", "type": "soup"},{}]
+            //[{"title":"bucek", "description":"nejlepsi chuti", "price":"120Kc", "type": "soup"},{}]
 
 			request.get({
 					uri: menuUrl,
@@ -99,14 +99,29 @@ class RestaurantService{
                                         price = page(this).next().text()
                                     }
                                     var title = String(page(this).text()).replace('\t','');
+                                    var description = '';
+                                    if(title.includes("-") || title.includes("–") || title.includes("/")){
+                                        var parts = title.split(/[-–/]+/)
+                                        //console.log('0:' + parts[0] + '  1:' + parts[1]);
+                                        if(parts.length == 2){
+                                            title = parts[0];
+                                            description = parts[1];
+                                        }
+                                        if(parts.length == 3){
+                                            title = parts[0]+'-'+parts[1]; //Kuře bang-bang
+                                            description = parts[2];
+                                        }
+                                        //console.log('    i: ' + i + ' text:' + page(this).text() + ' class:' + page(this).attr('class'));
+                                    }
                                     var type = '';
                                     if(page(this).attr('class').includes("capitalize")) {
                                         type = 'soup';
                                     }
-                                    console.log('title: ' + title + '  price: ' + price + '  type: ' + type);
+                                    console.log('title: ' + title + '  description: ' + description +'  price: ' + price + '  type: ' + type);
 
                                     menu.push({
                                         title: title,
+                                        description: description,
                                         price: price,
                                         type: type
                                     });
