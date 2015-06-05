@@ -1,4 +1,4 @@
-/// <reference path='demoscope.ts' />
+/// <reference path='services/restaurantAPI.ts' />
 
 module demoApp {
     'use strict';
@@ -11,13 +11,16 @@ module demoApp {
         // See http://docs.angularjs.org/guide/di
         public static $inject = [
             '$scope',
-            '$location'
+            '$location',
+            'Restaurants'
         ];
 
         // dependencies are injected via AngularJS $injector
         // controller's name is registered in Application.ts and specified from ng-controller attribute in index.html
         constructor(private $scope:IDemoScope,
-                    private $location:ng.ILocationService) {
+                    private $location:ng.ILocationService,
+                    private Restaurants: any) {
+            this.Restaurants.query();
         }
 
 

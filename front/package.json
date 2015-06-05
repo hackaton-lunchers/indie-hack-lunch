@@ -30,5 +30,8 @@
     "gulp-tslint": "^1.4.4",
     "gulp-typescript": "^2.5.0",
     "gulp-webserver": "^0.9.1"
+  },
+  "dependencies": {
+    "restangular": "^1.5.1"
   }
 }
