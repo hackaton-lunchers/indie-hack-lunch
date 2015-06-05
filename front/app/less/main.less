@@ -1,7 +1,14 @@
 body {
-  background: #ffffff;
-  color: #666;
+  background-color: rgb(249, 249, 249);
+  color: rgb(85, 84, 89);
   font-size: 15px;
+  font-family: 'Montserrat', sans-serif;
+}
+a {
+  color: rgb(85, 84, 89);
+}
+a:hover {
+  color: #303030;
 }
 
 .main {
@@ -12,14 +19,17 @@ body {
   width: 100%;
   top: 0;
   left: 0;
-  height: 50px;
-  background: rgb(241, 241, 241);
+  height: 64px;
+  background: rgb(255, 255, 255);
   border-bottom: 1px solid #666;
+  box-shadow: rgba(0, 0, 0, 0.14902) 0px 1px 4px 0px;
 }
 
 .top-bar h1 {
   margin: 0;
-  line-height: 50px;
+  line-height: 64px;
+  font-size: 28px;
+  color: rgb(0, 0, 0);
 }
 .top-bar .menu .button {
 
@@ -46,10 +56,12 @@ body {
 .top-bar h1 {
   margin: 0;
   padding: 0;
+  float: left;
 }
 
 h2 {
   margin: 5px 0 5px 0;
+  font-size: 28px;
 }
 
 .restaurant ul {
@@ -68,3 +80,32 @@ h2 {
   border-bottom: none;
 }
 
+.menu {
+  float: left;
+  margin-left: 20px;
+  display: inline-block;
+}
+.menu li {
+  list-style: none;
+  display: inline-block;
+  line-height: 64px;
+  margin-right: 10px;
+}
+.menu li:last-child {
+  margin-right: 0;
+}
+.menu li a {
+  color: #262626;
+  text-decoration: none;
+}
+
+.menu.right {
+  float: right;
+}
+
+
+.tools {
+
+  float: RIGHT;
+  font-size: 15px;
+}

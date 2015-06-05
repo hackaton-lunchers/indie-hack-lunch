@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
-
+    <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
 </head>
 <body ng-controller="RestaurantsController" class="ng-cloak">
 
@@ -15,14 +15,35 @@
     <div class="container">
         <div class="col-sm-12">
             <h1>Today's menu</h1>
+            <ul class="menu">
+                <li>
+                    <a href="#"><button type="button" class="btn btn-default" aria-label="Left Align"><span class="glyphicon glyphicon-star" aria-hidden="true"></span> Favourites</button></a>
+                </li>
+                <li>
+                    <a href="#"><button type="button" class="btn btn-default" aria-label="Left Align"><span class="glyphicon glyphicon-list" aria-hidden="true"></span> List of all</button></a>
+                </li>
+            </ul>
+            <ul class="menu right">
+                <li>
+                    <a href="#"><button type="button" class="btn btn-default" aria-label="Left Align"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Login</button></a>
+                </li>
+            </ul>
         </div>
     </div>
 </div>
 
 <div class="main container">
     <div class="col-sm-12 restaurant" ng-repeat="restaurant in restaurants">
+        <div class="tools">
+            <a href="" title="Save to favourites">
+                <button type="button" class="btn btn-default" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                    Add to favourites
+                </button>
+            </a>
+        </div>
         <h2>{{restaurant.title}}</h2>
-        <ul>
+        <ul class="">
             <li ng-repeat="menu in restaurant.menu">
                 <h3>{{menu.title}}</h3> <span class="price">{{menu.price}}</span>
             </li>
