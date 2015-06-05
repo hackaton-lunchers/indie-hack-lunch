@@ -2,18 +2,42 @@
 
 var request = require('request');
 
+
+
+
 class SlackMessageService {
 
 	sendMenu(menu, channel, done) {
 
 		var payload = {
 
-			"channel": "@tomas_milata", 
+			"channel": channel, 
 			"username": "Lunch Menu",
-			"text": "This is posted to #general and comes from a bot named webhookbot.", 
-			"icon_emoji": ":spaghetti:"
+			"text": menu.title + " <https://url.com/|Im going>", 
+			"icon_emoji": ":spaghetti:",
 
+			"attachments": [
+			{
+				"fallback": "",
+				"fields": new Array()
+			}
+			]
 		};
+
+		menu.menu.forEach(function(m) {			
+			var type = ""
+			if (m.type) {
+				type = "[" + m.type + "] "
+			}
+			payload.attachments[0].fields.push(
+			{
+				"title": type + m.title,
+				"value": m.price  + " <https://url.com/|Like> <https://url.com/|Dislike>"
+			}
+			)
+		});
+
+		
 
 		request.post({
 			url:     'https://hooks.slack.com/services/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',
