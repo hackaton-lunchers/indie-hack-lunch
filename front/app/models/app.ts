@@ -22,6 +22,9 @@ module demoApp {
                 url: '/login',
                 templateUrl: 'templates/login.html',
                 controller: 'AuthController as auth'
+            }).state('favourites', {
+                url: '/favourites',
+                templateUrl: 'templates/favourites.html'
             })
         })
         .config(['RestangularProvider', (restangularProvider: restangular.IProvider) => {
