@@ -13,7 +13,13 @@
 <div class="top-bar">
     <div class="menu">
         <span class="button"></span>
-        {{restaurants}}
+        <div ng-repeat="restaurant in restaurants">
+            {{restaurant.title}}
+            <ul ng-repeat="menu in restaurant.menu">
+                <li>{{menu.title}} {{menu.price}}</li>
+            </ul>
+
+        </div>
     </div>
 </div>
 <!--

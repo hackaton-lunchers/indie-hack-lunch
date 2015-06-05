@@ -19,7 +19,7 @@ module demoApp {
         // controller's name is registered in Application.ts and specified from ng-controller attribute in index.html
         constructor(private $scope:IDemoScope,
                     private $location:ng.ILocationService,
-                    private Restaurants: restangular.IService) {
+                    private Restaurants: any) {
             this.Restaurants.query().then((result) => {
                 $scope.restaurants = result;
             });
