@@ -5,6 +5,7 @@ var Basic = require('hapi-auth-basic');
 var lout = require('lout');
 var Routes = require('./routes');
 var services = require('./services');
+var repeat = require('repeat');
 
 var server = new Hapi.Server();
 var routes = new Routes(server);
@@ -35,3 +36,7 @@ server.register(Basic, function (err) {
         console.log('Server running at:', server.info.uri);
     });
 });
+
+repeat(function() {
+    services.restaurants.loadDailyMenus().then(services.restaurants.sendMenu());
+}).every(24, 'h').start.in(24, 'h');
