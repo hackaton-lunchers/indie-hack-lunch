@@ -8,7 +8,7 @@ class BaseRepository{
 
 		this._db = mongoose;
 
-		this._db.connect('mongodb://localhost/eshop');
+		this._db.connect('mongodb://admin:lunchers123@ds043262.mongolab.com:43262/lunchers');
 	}
 
 	getObjectId() {
