@@ -19,48 +19,20 @@ class Routes{
 
         this.server.route({
             method: 'GET',
-            path: '/categories/all',
-            handler: controllers.categories.getAll,
+            path: '/restaurants/all',
+            handler: controllers.restaurants.getAll,
             config: {
                 auth: 'simple'
-            }
-        });
-
-        this.server.route({
-            method: 'GET',
-            path: '/categories/insert',
-            handler: controllers.categories.insert,
-            config: {
-                auth: 'simple'
-            }
-        });
-
-        this.server.route({
-            method: 'GET',
-            path: '/products/bycategory',
-            handler: controllers.products.getByCategory,
-            config: {
-                auth: 'simple',
-                validate: validateId
-            }
-        });
-
-        this.server.route({
-            method: 'GET',
-            path: '/products/detail',
-            handler: controllers.products.getDetail,
-            config: {
-                auth: 'simple',
-                validate: validateId
             }
         });
     }
 }
 
+/* not used
 let validateId = {
     query: {
         id: Joi.number().integer().min(1)
     }
-}
+} */
 
 module.exports = Routes;

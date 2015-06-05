@@ -1,11 +1,9 @@
 "use strict"
 
-var CategoryService = require('./categoryService');
-var ProductService = require('./productService');
+var RestaurantService = require('./restaurantService');
 var UserService = require('./userService');
 var AuthenticationService = require('./authenticationService');
 
-module.exports.categories = new CategoryService();
-module.exports.products = new ProductService();
+module.exports.restaurants = new RestaurantService();
 module.exports.users = new UserService();
 module.exports.authentication = new AuthenticationService();
