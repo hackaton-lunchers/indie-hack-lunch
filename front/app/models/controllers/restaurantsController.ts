@@ -21,7 +21,9 @@ module demoApp {
                     private $location:ng.ILocationService,
                     private Restaurants: any) {
             this.Restaurants.query().then((result) => {
-                $scope.restaurants = result;
+                $scope.restaurants = result.filter((item) => {
+                    return item.title !== null;
+                });
             });
         }
 
