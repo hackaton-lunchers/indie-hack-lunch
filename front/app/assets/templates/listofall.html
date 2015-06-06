@@ -2,7 +2,7 @@
     <div class="col-sm-12 restaurant" ng-repeat="restaurant in restaurants">
         <div class="tools">
             <a href="" title="Save to favourites">
-                <button type="button" class="btn btn-default" aria-label="Left Align">
+                <button type="button" class="btn btn-default" ng-disabled="!loggedUsername" aria-label="Left Align" ng-click="rest.addToFavourite(restaurant._id)">
                     <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
                     Add to favourites
                 </button>

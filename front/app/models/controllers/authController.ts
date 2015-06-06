@@ -12,13 +12,15 @@ module demoApp {
             // See http://docs.angularjs.org/guide/di
             public static $inject = [
                 'Auth',
-                '$scope'
+                '$scope',
+                '$rootScope'
             ];
 
             // dependencies are injected via AngularJS $injector
             // controller's name is registered in Application.ts and specified from ng-controller attribute in index.html
-            constructor(private Auth: any, private $scope: IDemoScope) {
+            constructor(private Auth: any, private $scope: IDemoScope, private $rootScope: IDemoRootScope) {
                 this.$scope.user = {};
+                this.$scope.user.username = $rootScope.loggedUsername;
                 console.log('Init');
             }
 

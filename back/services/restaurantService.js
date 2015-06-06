@@ -144,7 +144,7 @@ class RestaurantService{
 		});
     }
 
-    sendMenu(channel) {
+    sendMenu(channels) {
 
         var self = this;
 
@@ -155,7 +155,7 @@ class RestaurantService{
             self.getAll().then(function (restaurants) {
 
                 restaurants.forEach(function (m) {
-                    menuPromises.push(self._slackMessageService.sendMenu(m, channel))
+                    menuPromises.push(self._slackMessageService.sendMenu(m, channels))
                 });
 
                 Promise.all(menuPromises).then(function() {
@@ -163,6 +163,33 @@ class RestaurantService{
                 })
             });
         });
+    }
+
+    updateUserPreferences(username, restaurantId) {
+
+        var self = this;
+
+        return new Promise(function(resolve, reject) {
+            self._restaurantRepository.getRestaurant(restaurantId).then(function (restaurant) {
+
+				if (!restaurant.users) {
+					restaurant.users = [];
+				}
+
+                if (restaurant.users.indexOf(username) < 0) {
+
+                    var newUsers = restaurant.users;
+                    newUsers.push(username);
+
+                    self._restaurantRepository.updateRestaurantPreference(restaurantId, newUsers).then(function() {
+                        resolve();
+                    });
+                } else {
+                    resolve();
+                }
+            });
+        });
+
     }
 }
 

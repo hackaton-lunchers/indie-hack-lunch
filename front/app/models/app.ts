@@ -5,6 +5,7 @@
 /// <reference path='./controllers/authController.ts' />
 /// <reference path='./services/restaurantAPI.ts' />
 /// <reference path='./services/authenticationAPI.ts' />
+/// <reference path='./services/userAPI.ts' />
 
 module demoApp {
     'use strict';
@@ -17,7 +18,7 @@ module demoApp {
             $stateProvider.state('list', {
                 url: '/list',
                 templateUrl: 'templates/listofall.html',
-                controller: 'RestaurantsController'
+                controller: 'RestaurantsController as rest'
             }).state('login', {
                 url: '/login',
                 templateUrl: 'templates/login.html',
@@ -33,6 +34,7 @@ module demoApp {
         }])
         .service('Restaurants', Restaurants)
         .service('Auth', Auth)
+        .service('User', User)
         .controller('RestaurantsController', RestaurantsController)
         .controller('AuthController', AuthController);
 }

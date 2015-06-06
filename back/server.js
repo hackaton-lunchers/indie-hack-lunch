@@ -11,7 +11,9 @@ var mongoose = require('mongoose');
 var server = new Hapi.Server();
 var routes = new Routes(server);
 
-server.connection({ port: 8084 });
+server.connection({ port: 8084, routes: {
+    cors: true
+} });
 
 server.register({ register: lout }, function(err) {
     if (err) {

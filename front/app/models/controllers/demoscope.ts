@@ -6,4 +6,8 @@ module demoApp {
         user: any
         username: string
     }
+
+    export interface IDemoRootScope extends ng.IRootScopeService {
+        loggedUsername: string
+    }
 }

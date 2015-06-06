@@ -20,26 +20,18 @@ class Routes{
         this.server.route({
             method: 'GET',
             path: '/restaurants/all',
-            handler: controllers.restaurants.getAll,
-            config: {
-            //    auth: 'simple'
-                cors: true
-            }
+            handler: controllers.restaurants.getAll
         });
 
 		this.server.route({
 			method: 'GET',
 			path: '/restaurants/load-daily-menus',
-			handler: controllers.restaurants.loadDailyMenus,
-			config: {
-			//	auth: 'simple'
-                cors: true
-			}
+			handler: controllers.restaurants.loadDailyMenus
 		});
 
         this.server.route({
             method: 'GET',
-            path: '/restaurants/send-daily-menus',
+            path: '/restaurants/send-daily-menus/{channel?}',
             handler: controllers.restaurants.sendDailyMenus,
             config: {
                 auth: 'simple'
@@ -56,6 +48,12 @@ class Routes{
             method: 'GET',
             path: '/callback',
             handler: controllers.auth.slack_callbackhandler
+        });
+
+        this.server.route({
+            method: 'POST',
+            path: '/users/{username}/update-favourite',
+            handler: controllers.users.updateFavourite
         });
     }
 }

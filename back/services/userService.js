@@ -29,10 +29,6 @@ class UserService{
         });
     }
 
-    updateUserPreferences() {
-		return this._userRepository.updateRestaurantPreference();
-    }
-
     getUsers() {
 
     }

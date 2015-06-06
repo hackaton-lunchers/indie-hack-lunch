@@ -9,6 +9,12 @@ module demoApp {
             private Restangular: restangular.IService
             ) {
         }
+
+        addToFavourite(username: string, restaurantId: string) {
+            return this.Restangular
+                .one('users', username)
+                .customPOST({id: restaurantId}, 'update-favourite');
+        }
     }
 
 }

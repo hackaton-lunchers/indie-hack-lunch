@@ -19,7 +19,15 @@ class RestaurantController{
     }
 
     sendDailyMenus(request, reply) {
-        services.restaurants.sendMenu("#lunch").then(function(){
+
+        //#lunch
+        var channels = [];
+
+        if (request.params.channel) {
+            channels.push(request.params.channel);
+        }
+
+        services.restaurants.sendMenu(channels).then(function(){
             reply({status: "send"});
         });
     }
