@@ -40,7 +40,7 @@ server.register(Basic, function (err) {
     });
 });
 
-mongoose.connect('mongodb://admin:lunchers123@ds043262.mongolab.com:43262/lunchers');
+mongoose.connect('mongodb://admin:lunchers123@ds055980.mongolab.com:55980/lunchers');
 
 repeat(function() {
     services.restaurants.loadDailyMenus().then(services.restaurants.sendMenu('#lunch-slackbot-test'));
