@@ -12,8 +12,10 @@ class Routes{
         this.server.route({
             method: 'GET',
             path: '/',
-            handler: function (request, reply) {
-                reply('Welcome ecma6 eshop. At "/docs" you can explore all the available endpoints. For authentication use username/password: john/secret');
+            handler: {
+                file: {
+                    path: '../front/_public/index.html'
+                }
             }
         });
 
@@ -54,6 +56,16 @@ class Routes{
             method: 'POST',
             path: '/users/{username}/update-favourite',
             handler: controllers.users.updateFavourite
+        });
+
+        this.server.route({
+            method: 'GET',
+            path: '/{param*}',
+            handler: {
+                directory: {
+                    path: '../front/_public'
+                }
+            }
         });
     }
 }
