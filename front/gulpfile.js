@@ -122,4 +122,4 @@ gulp.task('serve', 'Serve the generated stuff.', ['watch'], function() {
         }));
 });
 
-gulp.task('default', 'When ran as "gulp" without exta task, it will run the server.', ['serve']);
+//gulp.task('default', 'When ran as "gulp" without exta task, it will run the server.', ['serve']);
