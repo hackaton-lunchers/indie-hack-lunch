@@ -17,6 +17,10 @@ angular.module('lunchers', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', '
 
   .config(($stateProvider, $urlRouterProvider) => {
     $stateProvider
+      .state('login', {
+        url: '/login',
+        templateUrl: 'app/login/login.html'
+      })
       .state('restaurants', {
         url: '/',
         templateUrl: 'app/restaurants/restaurants.html',
